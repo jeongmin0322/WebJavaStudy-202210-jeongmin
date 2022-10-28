@@ -18,6 +18,14 @@ public class Student {
         calculation();
     } //생성자를 통한 주입
 
+    public void updateStudent(Student updateStudent){
+        this.kor = updateStudent.kor;
+        this.eng = updateStudent.eng;
+        this.math = updateStudent.math;
+
+        calculation();
+    }
+
     private void calculation(){
         setTotalScore();
         setAvgScore();

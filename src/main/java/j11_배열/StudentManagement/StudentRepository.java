@@ -55,6 +55,18 @@ public class StudentRepository {
     public Student getStudent(int index) {
         return students[index];
     }
+
+    public Student removeStudent(int index) {
+        Student student = students[index];
+        students[index] = null;
+        return student;
+    }
+
+    public Student updateStudent(int index, Student updateStudent){
+        Student student = students[index];
+        student.updateStudent(updateStudent);
+        return student;
+    }
 }
 
 

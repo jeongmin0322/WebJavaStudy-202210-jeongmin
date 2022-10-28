@@ -12,7 +12,6 @@ public class StudentService {
     }
 
 
-
     public void registerStudent() { //호출되면 입력받아서 학생1명을 생성
 
         String name;
@@ -31,32 +30,82 @@ public class StudentService {
         math = scanner.nextInt();
         scanner.nextLine();
 
-        Student student = new Student(name,kor,eng,math);
+        Student student = new Student(name, kor, eng, math);
 
         studentRepository.addStudent(student);
 
     }
 
-    public void showStudents(){
+    public void showStudents() {
         Student[] students = studentRepository.getStudents();
 
-        for(int i=0; i<students.length; i++){
+        for (int i = 0; i < students.length; i++) {
             Student student = students[i];
-            student.showStudentInfo();
+            if (student != null) {
+                student.showStudentInfo();
+            }
+
         }
     }
-    public void showStudent(){
+
+    private int indexOf() {
         String name;
-        System.out.println("[학생 정보 이름으로 조회]");
         System.out.print("이름을 입력하세요: ");
         name = scanner.nextLine();
 
-        int index = studentRepository.findStudentByName(name); //인덱스 번호를 찾아줌
-        if (index == -1){
+        return studentRepository.findStudentByName(name);
+    }
+
+
+    public void showStudent() {
+        System.out.println("[학생 정보 이름으로 조회]");
+        int index = indexOf();
+
+        if (index == -1) {
             System.out.println("입력한 이름의 학생이 등록되어 있지 않습니다.");
             return; //return 걸리면 이 메소드를 바로 빠져나감
         }
 
         studentRepository.getStudent(index).showStudentInfo();
+        System.out.println("조회 완료!\n");
+
+    }
+
+    public void deleteStudent() { //showStudent랑 똑같음
+        System.out.println("[학생 정보 이름으로 삭제]");
+        int index = indexOf();
+
+        if (index == -1) {
+            System.out.println("입력한 이름의 학생이 등록되어 있지 않습니다.");
+            return;
+        }
+        studentRepository.removeStudent(index).showStudentInfo();
+        System.out.println("삭제 완료!\n");
+    }
+
+    public void modifyStudent() {
+        System.out.println("[학생 정보 이름으로 수정]");
+        int index = indexOf();
+        int kor;
+        int eng;
+        int math;
+
+        if (index == -1) {
+            System.out.println("입력한 이름의 학생이 등록되어 있지 않습니다.");
+            return;
+        }
+        System.out.print("국어: ");
+        kor = scanner.nextInt();
+        System.out.print("영어: ");
+        eng = scanner.nextInt();
+        System.out.print("수학: ");
+        math = scanner.nextInt();
+        scanner.nextLine();
+
+        Student updateStudent = new Student(null, kor, eng, math);
+
+        studentRepository.updateStudent(index, updateStudent);
+        System.out.println("수정 완료");
     }
 }
+
