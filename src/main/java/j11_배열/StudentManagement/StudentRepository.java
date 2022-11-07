@@ -14,6 +14,8 @@ public class StudentRepository {
              index = increaseArray(); //늘려줌
          }
 
+
+
         students[index] = student; //비어있는애한테 넣어줌
     }
 
