@@ -29,7 +29,6 @@ public class StringList {
         String str1 = list.get(0); //0번째 있는 리스트를 꺼내라
         System.out.println(str1);
 
-
         //반복을 사용한 값 조회
 
         for(int i=0; i<list.size(); i++){
@@ -89,6 +88,9 @@ public class StringList {
         for(Object object : objects){
             System.out.println(object);
         }
+
+
+
 
 
     }
