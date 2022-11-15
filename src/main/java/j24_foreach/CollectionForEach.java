@@ -68,5 +68,6 @@ public class CollectionForEach {
         students.forEach((key, value) ->{
             System.out.println("학번: "+key+", 이름:"+value);
         });
+
     }
 }
